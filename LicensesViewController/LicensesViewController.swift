@@ -65,6 +65,8 @@ open class LicensesViewController: UIViewController {
 
    - parameter bundle:       The bundle containing the plist
    - parameter resourceName: The resource name of the plist
+   - parameter additionalItems: A dictionary whose keys are titles and values are bodies for items
+     that cannot be loaded from property list
    */
   @objc open func loadPlist(_ bundle: Bundle, resourceName: String, additionalItems: [String: String] = [:]) {
     if let plistDict = bundle.loadPlist(resourceName) {
@@ -76,7 +78,7 @@ open class LicensesViewController: UIViewController {
    Loads the contents of a Settings.bundle style plist dictionary into the tableView
 
    - parameter dictionary: A Settings.bundle style NSDictionary
-     - parameter additionalItems: A dictionary whose keys are titles and values are bodies for items
+   - parameter additionalItems: A dictionary whose keys are titles and values are bodies for items
      that cannot be loaded from property list
    */
     @objc open func loadPlist(_ dictionary: NSDictionary, additionalItems: [String: String] = [:]) {
