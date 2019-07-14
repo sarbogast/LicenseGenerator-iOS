@@ -66,9 +66,9 @@ open class LicensesViewController: UIViewController {
    - parameter bundle:       The bundle containing the plist
    - parameter resourceName: The resource name of the plist
    */
-  @objc open func loadPlist(_ bundle: Bundle, resourceName: String) {
+  @objc open func loadPlist(_ bundle: Bundle, resourceName: String, additionalItems: [String: String] = [:]) {
     if let plistDict = bundle.loadPlist(resourceName) {
-      loadPlist(plistDict)
+      loadPlist(plistDict, additionalItems: additionalItems)
     }
   }
 
