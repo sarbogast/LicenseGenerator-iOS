@@ -76,10 +76,21 @@ open class LicensesViewController: UIViewController {
    Loads the contents of a Settings.bundle style plist dictionary into the tableView
 
    - parameter dictionary: A Settings.bundle style NSDictionary
+     - parameter additionalItems: A dictionary whose keys are titles and values are bodies for items
+     that cannot be loaded from property list
    */
-  @objc open func loadPlist(_ dictionary: NSDictionary) {
-    let items = dictionary.toLicenseItems()
-    setDataSource(items)
+    @objc open func loadPlist(_ dictionary: NSDictionary, additionalItems: [String: String] = [:]) {
+    var items = dictionary.toLicenseItems()
+        for (title, body) in additionalItems {
+            items.append(LicenseItem(title: title, body: body))
+        }
+        setDataSource(items.sorted(by: { (item1, item2) -> Bool in
+            if let title1 = item1.title, let title2 = item2.title {
+                return title1.compare(title2) == .orderedAscending
+            } else {
+                return false
+            }
+        }))
   }
 
   /**
